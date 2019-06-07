@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from.models import *
 from .forms import CommentForm
+from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 
 def blog_index(request):
     posts = Post.objects.all().order_by('-created_on')
@@ -33,7 +35,11 @@ def blog_detail(request, pk):
                 post=post
             )
             comment.save()
-    comments = Comment.objects.filter(post=post)
+            return HttpResponseRedirect('/blog/'+str(pk))
+    comments = Comment.objects.filter(post=post).order_by('-created_on')
+    paginator = Paginator(comments,5)
+    page = request.GET.get('page')
+    comments = paginator.get_page(page)
     context = {
         "post": post,
         "comments": comments,

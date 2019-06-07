@@ -23,6 +23,30 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <hr>
+     <div class ="pagination">
+        {% if comments.has_previous %}
+        <a class = "pagingation-action" href="?page=1">
+            <i class="fas fa-angle-double-left"></a></i>
+        </a>
+        <a class="pagination-action" href="?page="{{ comments.previous_page.number}}">
+            <i class ="fas fa-angle-left"></i>
+
+        </a>
+        {% endif %}
+        {% for num in comments.paginator.page_range %}
+        {% if comments.number == num %}
+        <strong>{{ num }}</strong>
+        {% elif num > comments.number|add:'-3' and num < comments.number|add:'+3' %}
+        <a href="?page={{num}}">{{num}}</a>
+        {% endif %}
+        {% endfor %}
+        {% if comments.has_next %}
+        <a href="?page ={{ comments.next_page_number }}">></a>
+        <a href="?page={{comments.paginator.num_pages}}">>></a>
+{% endif %}
+    </div>
+    <hr>
     <h3>Comments:</h3>
     {% for comment in comments %}
     <p>
