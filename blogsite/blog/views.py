@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from blog.models import *
+from.models import *
 from .forms import CommentForm
 
 def blog_index(request):

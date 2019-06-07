@@ -8,6 +8,8 @@
 from django.shortcuts import render
 from .models import Project,Comment
 from .forms import CommentForm
+from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 def project_index(request):
@@ -29,7 +31,12 @@ def project_detail(request,pk):
                 project = project
             )
             comment.save()
-    comments = Comment.objects.filter(project=project)
+            route = pk
+            return HttpResponseRedirect('/'+str(route)+'/')
+    comments = Comment.objects.filter(project=project).order_by('-created_on')
+    paginator = Paginator(comments,3)
+    page = request.GET.get('page')
+    comments = paginator.get_page(page)
     context = {
         "project":project,
         "comments":comments,

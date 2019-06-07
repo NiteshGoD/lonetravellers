@@ -14,4 +14,7 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey('Project',on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.author
+
 

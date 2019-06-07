@@ -2,15 +2,15 @@ from django import forms
 
 class CommentForm(forms.Form):
     author = forms.CharField(
-        max_length=90,
+        max_length=15,
         widget=forms.TextInput(attrs={
             "class":"form-control",
-            "placeholder":"your name"
+            "placeholder":"Your Name"
         })
     )
     body = forms.CharField(
         widget=forms.Textarea(attrs={
             "class":"form-control",
-            "placeholder":"write a comment"
+            "placeholder":"Say something about it..."
         })
     )

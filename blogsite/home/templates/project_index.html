@@ -4,6 +4,7 @@
 <h1 class="bg-light" style="text-align: center;">Places Travelled</h1>
 <div class="row">
 {% for project in projects %}
+
     <div class="col-md-4">
         <div class="card mb-2 bg-light">
             <img class="card-img-top" src = "{% static project.image %}">
@@ -13,7 +14,8 @@
                 <a href ="{% url 'project_detail' project.pk %}" class="btn btn-primary">Read More</a>
             </div>
         </div>
-</div>
+    </div>
+
 {% endfor %}
 </div>
 {% endblock %}
